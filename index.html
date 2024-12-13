@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Encryption Algorithms</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        background: #f4f4f4;
+      }
+      .container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        background: #fff;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+      }
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+      .form-group {
+        margin-bottom: 20px;
+      }
+      .form-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+      .form-group select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+      }
+      .button-group {
+        text-align: center;
+      }
+      .button-group button {
+        padding: 10px 20px;
+        font-size: 16px;
+        color: #fff;
+        background-color: #007bff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin: 5px;
+      }
+      .button-group button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Shifrlash Algoritmlari Dasturi</h1>
+      <form id="encryption-form">
+        <div class="form-group">
+          <label for="algorithm">Algoritmni tanlang:</label>
+          <select id="algorithm" name="algorithm">
+            <option value="sezar">Sezar</option>
+            <option value="vigenere">Vijener</option>
+            <option value="rsa">RSA</option>
+          </select>
+        </div>
+        <div class="button-group">
+          <button type="button" onclick="navigate()">O'tish</button>
+        </div>
+      </form>
+    </div>
+    <script>
+      function navigate() {
+        const algorithm = document.getElementById("algorithm").value;
+        if (algorithm === "sezar") {
+          window.location.href = "./sezar.html";
+        } else if (algorithm === "vigenere") {
+          window.location.href = "./vijiner.html";
+        } else if (algorithm === "rsa") {
+          window.location.href = "./rsa.html";
+        }
+      }
+    </script>
+  </body>
+</html>

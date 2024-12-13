@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vijenere Shifrlash</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to right, #1e3c72, #2a5298);
+        color: #fff;
+      }
+
+      .container {
+        background: #fff;
+        color: #333;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+        width: 100%;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      .form-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+      }
+
+      .form-group textarea {
+        resize: vertical;
+        height: 100px;
+      }
+
+      .button-group {
+        margin-top: 20px;
+      }
+
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        color: #fff;
+        background-color: #2a5298;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #1e3c72;
+      }
+
+      .output {
+        margin-top: 20px;
+        padding: 15px;
+        background: #f4f4f4;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        color: #333;
+        text-align: left;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Vijenere Shifrlash</h1>
+      <form id="vigenere-form">
+        <div class="form-group">
+          <label for="plaintext">Matnni kiriting:</label>
+          <textarea id="plaintext" placeholder="Matnni kiriting..."></textarea>
+        </div>
+        <div class="form-group">
+          <label for="key">Kalit so'zni kiriting:</label>
+          <input type="text" id="key" placeholder="Masalan, kalit" />
+        </div>
+        <div class="button-group">
+          <button type="button" onclick="encryptText()">Shifrlash</button>
+          <button type="button" onclick="decryptText()">Deshifrlash</button>
+        </div>
+      </form>
+      <div id="output" class="output" style="display: none"></div>
+    </div>
+
+    <script>
+      function vigenereCipher(text, key, mode) {
+        const result = [];
+        key = key.toUpperCase();
+        let keyIndex = 0;
+
+        for (let i = 0; i < text.length; i++) {
+          const char = text[i];
+
+          if (char.match(/[a-z]/i)) {
+            const isUpperCase = char === char.toUpperCase();
+            const base = isUpperCase ? 65 : 97;
+            const charCode = char.charCodeAt(0) - base;
+            const keyCode = key[keyIndex % key.length].charCodeAt(0) - 65;
+
+            const newCharCode =
+              mode === "encrypt"
+                ? (charCode + keyCode) % 26
+                : (charCode - keyCode + 26) % 26;
+
+            result.push(String.fromCharCode(newCharCode + base));
+            keyIndex++;
+          } else {
+            result.push(char);
+          }
+        }
+
+        return result.join("");
+      }
+
+      function encryptText() {
+        const plaintext = document.getElementById("plaintext").value;
+        const key = document.getElementById("key").value;
+        if (!plaintext || !key) {
+          alert("Iltimos, barcha maydonlarni to'ldiring!");
+          return;
+        }
+
+        const encrypted = vigenereCipher(plaintext, key, "encrypt");
+        const output = document.getElementById("output");
+        output.style.display = "block";
+        output.textContent = `Shifrlangan matn: ${encrypted}`;
+      }
+
+      function decryptText() {
+        const plaintext = document.getElementById("plaintext").value;
+        const key = document.getElementById("key").value;
+        if (!plaintext || !key) {
+          alert("Iltimos, barcha maydonlarni to'ldiring!");
+          return;
+        }
+
+        const decrypted = vigenereCipher(plaintext, key, "decrypt");
+        const output = document.getElementById("output");
+        output.style.display = "block";
+        output.textContent = `Deshifrlangan matn: ${decrypted}`;
+      }
+    </script>
+  </body>
+</html>
