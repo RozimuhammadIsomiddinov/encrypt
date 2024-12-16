@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shifrlash va Deshifrlash</title>
+    <link rel="stylesheet" href="styles.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Shifrlash va Deshifrlash</h1>
+
+      <label for="operation">Amalni tanlang:</label>
+      <select id="operation">
+        <option value="shifrlash">Shifrlash</option>
+        <option value="deshifrlash">Deshifrlash</option>
+      </select>
+
+      <label for="inputText">Matnni kiriting:</label>
+      <textarea id="inputText" rows="4"></textarea>
+
+      <label for="key">Kalitni kiriting:</label>
+      <input
+        type="text"
+        id="key"
+        placeholder="Masalan: 16, 24 yoki 32 baytli kalit"
+      />
+
+      <label for="iv">IV ni kiriting (faqat deshifrlash uchun):</label>
+      <input
+        type="text"
+        id="iv"
+        placeholder="Shifrlash jarayonida generatsiya qilinadi"
+      />
+
+      <button id="processBtn">Jarayonni boshlash</button>
+
+      <div class="output" id="output"></div>
+    </div>
+
+    <script src="./aes.js"></script>
+  </body>
+</html>
